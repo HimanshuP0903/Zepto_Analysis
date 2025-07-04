@@ -1,5 +1,5 @@
-create database zepto_project;
-	drop table zepto;
+CREATE DATABASE zepto_project;
+	DROP TABLE zepto;
     CREATE TABLE zepto (
   sku_id SERIAL PRIMARY KEY,
   Category VARCHAR(120),
@@ -9,70 +9,70 @@ create database zepto_project;
   availableQuantity INTEGER,
   discountedSellingPrice NUMERIC(8,2),
   weightInGms INTEGER,
-  outOfStock boolean,
+  outOfStock BOOLEAN,
   quantity INTEGER
 );
-select * from zepto
-limit 10;
-select count(*) from zepto;
+SELECT * FROM zepto
+LIMIT 10;
+SELECT count(*) FROM zepto;
 
 # Null Values
 
-select * from zepto
-where 
-name is null
-or 
-Category is null
-or
-mrp is null
-or
-discountPercent is null
-or
-availableQuantity is null
-or
-discountedSellingPrice is null
-or
-weightInGms is null
-or
-outOfStock is null
-or
-quantity is null;
+SELECT * FROM zepto
+WHERE 
+name IS NULL
+OR 
+Category IS NULL
+OR 
+mrp IS NULL
+OR 
+discountPercent IS NULL
+OR 
+availableQuantity IS NULL
+OR 
+discountedSellingPrice IS NULL
+OR 
+weightInGms IS NULL
+OR 
+outOfStock IS NULL
+OR 
+quantity IS NULL;
 
 # Different Categories
 
-select distinct Category
-from zepto
-order by category;
+SELECT DISTINCT Category
+FROM zepto
+ORDER BY category;
 
 # Count of items which are out of stock 
 
-select outOfStock, count(sku_id)
-from zepto
-group by outOfStock;
+SELECT outOfStock, count(sku_id)
+FROM zepto
+GROUP BY outOfStock;
 
 # multiple product names
 
-select name, count(sku_id) as "Number of SKUs"
-from zepto
-group by name
-having count(sku_id) > 1
-order by count(sku_id) desc;
+SELECT name, count(sku_id) AS "Number of SKUs"
+FROM zepto
+GROUP BY name
+HAVING count(sku_id) > 1
+ORDER BY count(sku_id) desc;
 
 # data cleaning
 # where product price is zero
 
-select * from zepto
-where mrp = 0 or discountedSellingPrice = 0;
+SELECT * FROM zepto
+WHERE mrp = 0 OR discountedSellingPrice = 0;
 
-delete from zepto
-where mrp = 0;
+DELETE FROM zepto
+WHERE mrp = 0;
 
 # conversion of rupees 
-update zepto
-set mrp = mrp/100.0,
+UPDATE zepto
+SET mrp = mrp/100.0,
 discountedSellingPrice = discountedSellingPrice/100.0;
 
-select mrp, discountedSellingPrice from zepto;
+SELECT mrp, discountedSellingPrice FROM zepto;
 
 # Data Analysis
 
